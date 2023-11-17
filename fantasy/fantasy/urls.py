@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+]
+
+# Use include() to add paths from the analysis application
+urlpatterns += [
+    path('analysis/', include('analysis.urls')),
+]
+
+urlpatterns += [
+    path('', RedirectView.as_view(url='analysis/', permanent=True)),
 ]
